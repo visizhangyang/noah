@@ -1,0 +1,85 @@
+<ion-view view-title="筛选"
+          hide-back-button="true"
+          class="customer-filter-page">
+  <ion-nav-buttons>
+    <back-btn state="tab.crm"></back-btn>
+  </ion-nav-buttons>
+
+  <ion-content>
+
+    <div class="radio-title">客户级别</div>
+    <div class="radio-set">
+      <ion-checkbox ng-class="{checked: vm.filter.client_level.IMPORTANT}"
+                    ng-model="vm.filter.client_level.IMPORTANT">
+        重要客户
+      </ion-checkbox>
+      <ion-checkbox ng-class="{checked: vm.filter.client_level.COMMON}"
+                    ng-model="vm.filter.client_level.COMMON">
+        普通客户
+      </ion-checkbox>
+    </div>
+
+    <div class="radio-title">客户状态</div>
+    <div class="radio-set">
+      <ion-checkbox ng-model="vm.filter.status.PRELIMINARY_COMMUNICATION"
+                    ng-class="{checked: vm.filter.status.PRELIMINARY_COMMUNICATION}">
+        初步沟通
+      </ion-checkbox>
+      <ion-checkbox ng-model="vm.filter.status['VISIT']"
+                    ng-class="{checked: vm.filter.status['VISIT']}">
+        见面拜访
+      </ion-checkbox>
+      <ion-checkbox ng-model="vm.filter.status['DEFINITE INTENTION']"
+                    ng-class="{checked: vm.filter.status['DEFINITE INTENTION']}">
+        确定意向
+      </ion-checkbox>
+      <ion-checkbox ng-model="vm.filter.status['SIGN_UP']"
+                    ng-class="{checked: vm.filter.status['SIGN_UP']}">
+        签约成交
+      </ion-checkbox>
+    </div>
+
+    <div class="radio-title">客户来源</div>
+    <div class="radio-set">
+      <ion-checkbox ng-model="vm.filter.source['FROM_OTHERS']"
+                    ng-class="{checked: vm.filter.source['FROM_OTHERS']}">
+        转介绍
+      </ion-checkbox>
+      <ion-checkbox ng-model="vm.filter.source['STRANGER_VISITOR']"
+                    ng-class="{checked: vm.filter.source['STRANGER_VISITOR']}">
+        陌拜
+      </ion-checkbox>
+      <ion-checkbox ng-model="vm.filter.source['COMPANY']"
+                    ng-class="{checked: vm.filter.source['COMPANY']}">
+        公司资源
+      </ion-checkbox>
+      <ion-checkbox ng-model="vm.filter.source['PERSONAL']"
+                    ng-class="{checked: vm.filter.source['PERSONAL']}">
+        个人资源
+      </ion-checkbox>
+      <ion-checkbox ng-model="vm.filter.source['PHONE']"
+                    ng-class="{checked: vm.filter.source['PHONE']}">
+        电话咨询
+      </ion-checkbox>
+      <ion-checkbox ng-model="vm.filter.source['EMAIL']"
+                    ng-class="{checked: vm.filter.source['EMAIL']}">
+        邮件咨询
+      </ion-checkbox>
+    </div>
+
+    <div class="clear-btn">
+      <div class="u-tap" ng-click="vm.resetOptions()">清空条件</div>
+    </div>
+
+  </ion-content>
+
+  <ion-footer-bar>
+    <div class="button-bar">
+      <button class="button button-positive"
+              ng-click="vm.query()"
+              ng-disabled="!vm.isValid()">
+        确认
+      </button>
+    </div>
+  </ion-footer-bar>
+</ion-view>

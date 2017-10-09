@@ -1,0 +1,6 @@
+{
+  "apiBaseUrl": "https://noah-dev.micaiapp.com/app/",
+  "riskLevelRedirect": "/noah-risk-level-test",
+  "restfulDirectMode": true,
+  "isNativeApp": false
+}

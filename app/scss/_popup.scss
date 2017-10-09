@@ -1,0 +1,98 @@
+
+$popup-border-color: #d9d9d9;
+.popup-container {
+  .popup {
+    border-radius: 5px;
+    width: 90%;
+    .popup-title {
+      @include bold-font();
+      color: black;
+      font-size: 17px;
+    }
+    .popup-sub-title {
+      color: black;
+    }
+    .popup-head {
+      border: none;
+      padding-bottom: 10px;
+      padding-top: 35px;
+    }
+    .popup-body {
+      color: black;
+      padding: 5px 23px 23px;
+      line-height: 22px;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px solid $popup-border-color;
+    }
+    .popup-buttons {
+      padding: 0;
+      min-height: 40px;
+      button {
+        @include bold-font();
+        padding: 16px;
+        min-height: 40px;
+        border-width: 0;
+        background: none;
+        color: #157efb;
+        &:first-child {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          border-right: 1px solid $popup-border-color;
+        }
+      }
+    }
+  }
+}
+
+.popup-container {
+  .popup {
+    .popup-body {
+      .close {
+        position: absolute;
+        left: 45%;
+        top: 115%;
+        font-size: 36px;
+        color: white;
+      }
+    }
+  }
+}
+
+// For property description popup
+.popup-container {
+  .popup {
+    .popup-title {
+      color: $noahTextCol;
+    }
+    .popup-body {
+      .property-description-list {
+        li {
+          text-align: left;
+          margin-bottom: 15px;
+          font-size: 12px;
+          color: $noahTextCol;
+          line-height: 15px;
+        }
+        li:last-child {
+          margin-bottom: 0px;
+        }
+      }
+    }
+  }
+}
+
+// For normal description popup
+.popup-container {
+  .popup {
+    .popup-body {
+      .content {
+        text-align: left;
+      }
+      .ending {
+        text-align: left;
+        margin-top: 10px;
+      }
+    }
+  }
+}

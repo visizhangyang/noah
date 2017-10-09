@@ -1,0 +1,21 @@
+<ion-view view-title="投资组合建议" hide-back-button="true" class="proposal-page white-theme">
+  <ion-nav-buttons>
+    <back-btn state="tab.crm"></back-btn>
+  </ion-nav-buttons>
+  <!--<ion-nav-buttons side="right">
+    <button class="button button-small button-clear button-positive profile-button" ui-sref="portfolioAnalysis({clientId: vm.clientId})">优化</button>
+  </ion-nav-buttons>-->
+  <ion-content>
+
+    <proposal-cmp ng-if="vm.proposal" proposal="vm.proposal.report" client-id="{{vm.clientId}}"></proposal-cmp>
+
+  </ion-content>
+
+  <ion-footer-bar>
+    <ion-footer-bar>
+      <button class="button button-full button-positive" on-request="vm.onNext()">
+      生成投资组合报告书
+    </button>
+    </ion-footer-bar>
+  </ion-footer-bar>
+</ion-view>

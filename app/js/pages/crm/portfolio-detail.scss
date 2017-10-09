@@ -1,0 +1,44 @@
+.portfolio-detail {
+
+  .header, .item {
+    padding: 5px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .item-field-sign {
+      width: 15px;
+      @include asset-sign();
+      flex: none;
+    }
+    .item-field-asset-class {
+      flex: 1;
+    }
+    .item-field-current {
+      width: 85px;
+      text-align: right;
+      flex: none;
+    }
+    .item-field-suggest {
+      width: 85px;
+      text-align: right;
+      flex: none;
+    }
+    .item-field-adjust {
+      width: 85px;
+      text-align: right;
+      flex: none;
+    }
+  }
+
+  .header {
+    background-color: $noah-header-background-color;
+    height: $noah-header-height;
+    color: $noahTextCol;
+  }
+
+  .item {
+    height: $noah-item-height;
+    color: $noah-item-color;
+  }
+}

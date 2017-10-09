@@ -1,0 +1,27 @@
+.risk-level-adjustment-graph {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: {
+        top: 20px;
+        bottom: 15px;
+    }
+    slide-wheel {
+        position: relative;
+        display: block;
+        height: 310px;
+        width: 300px;
+    }
+    .operator-big {
+        display: inline-block;
+        width: 12.5px;
+        height: 15px;
+    }
+    .operator-small {
+        display: inline-block;
+        width: 8.5px;
+        height: 10px;
+    }
+}

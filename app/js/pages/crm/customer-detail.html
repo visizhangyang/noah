@@ -1,0 +1,103 @@
+<ion-view view-title="客户详情" hide-back-button="true" class="customer-detail-page">
+    <ion-nav-buttons>
+        <back-btn state="tab.crm"></back-btn>
+    </ion-nav-buttons>
+
+    <ion-content class="has-support">
+
+        <div class="summary-container">
+            <div class="summary">
+                <div class="header">
+                    <i class="icon unicon-important-client-dark" ng-if="vm.client.client_level === 'IMPORTANT'"></i>
+                    <span class="name" ng-bind="vm.client.name"></span>
+                </div>
+                <div class="position">
+                    <span ng-bind="vm.client.job_position"></span>
+                    <span ng-if="vm.client.job_position && vm.client.company">|</span>
+                    <span ng-bind="vm.client.company"></span>
+                </div>
+                <div class="progress">
+                    最后跟进时间
+                    <span ng-bind="vm.client.followed | date: 'yyyy-MM-dd HH:mm'"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-container">
+            <button role="button" class="button button-clear edit-btn" ui-sref="customerEdit({id: vm.client.id})" nav-direction="forward">
+              编辑
+            </button>
+            <div class="title-bar">
+                客户信息
+            </div>
+            <div class="info-item client-phone" ng-bind="vm.client.phone"></div>
+            <div class="info-item" ng-if="vm.client.we_chat">
+                微信: {{ vm.client.we_chat }}
+            </div>
+            <div class="info-item" ng-if="vm.client.company">
+                所在公司: {{ vm.client.company }}
+            </div>
+            <div class="info-item" ng-if="vm.client.job_position">
+                客户职位: {{ vm.client.job_position }}
+            </div>
+            <div class="info-item" ng-if="vm.client.birthday">
+                出生年月: {{ vm.client.birthday | date: 'yyyy-MM-dd' }}
+            </div>
+
+            <div class="info-item" ng-if="vm.client.address">
+                详细地址: {{ vm.client.address }}
+            </div>
+            <div class="info-item" ng-if="vm.client.status">
+                客户来源: {{ vm.client.status }}
+            </div>
+            <div class="info-item" ng-if="vm.client.source">
+                客户来源: {{ vm.client.source }}
+            </div>
+            <div class="info-item" ng-if="vm.client.note">
+                备注: {{ vm.client.note }}
+            </div>
+            <div class="info-item">
+                创建日期:
+                <span ng-bind="vm.client.created | date: 'yyyy-MM-dd HH:mm'"></span>
+            </div>
+            <div class="info-item follow-date">
+                最后修改时间:
+                <span ng-bind="vm.client.updated | date: 'yyyy-MM-dd HH:mm'"></span>
+            </div>
+        </div>
+
+        <div class="list">
+            <a class="item item-icon-right" ui-sref="kyc({clientId: vm.client.id})" nav-direction="forward">
+              风险评测
+              <i class="icon unicon-forward accessory"></i>
+            </a>
+            <!--<a class="item item-icon-right" ng-if="!vm.client.risk_level" ui-sref="risklevelChange({id: vm.client.id})" nav-direction="forward">
+              风险等级
+              <i class="icon unicon-forward accessory"></i>
+            </a>-->
+            <a class="item item-icon-right" ng-if="vm.client.has_asset_allocation" ui-sref="asset-summary({clientId: vm.client.id})"
+                nav-direction="forward">
+              财富体检
+              <i class="icon unicon-forward accessory"></i>
+            </a>
+            <a class="item item-icon-right" ng-if="vm.client.has_portfolio_proposal" ui-sref="proposal({id: vm.client.id})" nav-direction="forward">
+              组合建议
+              <i class="icon unicon-forward accessory"></i>
+            </a>
+            <a class="item item-icon-right" ui-sref="portfolioAnalysis({clientId: vm.client.id})" nav-direction="forward" ng-if="vm.UserModel.features['ATTRIBUTE_ANALYSIS']">
+              优化
+              <i class="icon unicon-forward accessory"></i>
+            </a>
+            <!--<a class="item item-icon-right" ui-sref="efProfile({clientId: vm.client.id})" nav-direction="forward" ng-if="vm.UserModel.features['EFFICIENT_FRONTIER']">
+              有效边界优化
+              <i class="icon unicon-forward accessory"></i>
+            </a>-->
+            <a class="item item-icon-right" ng-disabled="!vm.client.has_proposal_book" ui-sref="bookList({clientId: vm.client.id})" nav-direction="forward">
+              报告书及合规记录
+              <i class="icon unicon-forward accessory"></i>
+            </a>
+        </div>
+
+    </ion-content>
+
+</ion-view>

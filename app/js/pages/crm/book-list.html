@@ -1,0 +1,54 @@
+<ion-view view-title="资产配置报告书"
+          hide-back-button="true"
+          class="book-list-page white-theme">
+  <ion-nav-buttons>
+    <back-btn state="home"></back-btn>
+  </ion-nav-buttons>
+
+  <ion-content>
+ 
+    <div class="header-box">
+          {{vm.userBaseInfo.realName}} {{vm.userBaseInfo | investorStatus}} {{vm.userBaseInfo.riskText}}</div>
+    </div>
+
+    <div class="item item-white pdf-item" ng-repeat="book in vm.bookList">
+      <div class="title" ng-click="vm.preview(book)">
+        <i class="icon unicon-pdf"></i>
+        <div>报告书: {{ book.created | date: 'yyyy-MM-dd HH:mm' }}</div>
+      </div>
+      <!--<div ng-if="book.status == 'SUCCESS'">
+        <button class="button button-red button-small" ng-click="vm.sendMail(book)">发送邮件</button>
+      </div>-->
+      <div ng-if="book.status == 'SUCCESS'">
+        <button class="button button-red" ng-click="vm.preview(book)">预览</button>
+        <button class="button" ng-click="vm.accept(book)" ng-class="book.pdf_adopted_status ? 'button-red-block' : 'button-red'">采纳</button>
+      </div>
+      <div class="status" ng-if="book.status == 'FAILURE'">
+         <button class="button button-clear button-small failure" disabled="disabled">生成失败</button>
+      </div>
+      <div class="status" ng-if="book.status == 'PROCESSING'">
+        <button class="button button-red-block" disabled="disabled">
+            生成中...
+          <div class="progress-bar">
+            <div class="progress-current" ng-style="{ 'width': book.progress + '%' }">
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div ng-if="vm.dataLoaded && vm.bookList.length == 0" class="noneText">
+        您尚未保存历史报告。
+    </div>
+    <div ng-if="(!vm.dataLoaded) && vm.bookList.length == 0" class="noneText">
+        加载中...
+    </div>
+  </ion-content>
+
+    <ion-footer-bar>
+        <div class="button-bar row clearPad">
+            <button class="button col col-33" ng-click="vm.backList()">返回首页</button>
+            <button class="button col" ng-click="vm.viewKYC()">更精准配置</button>
+        </div>
+    </ion-footer-bar>
+</ion-view>

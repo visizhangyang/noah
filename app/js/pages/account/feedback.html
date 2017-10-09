@@ -1,0 +1,49 @@
+<ion-view title="意见反馈" class="feedback">
+  <ion-nav-buttons>
+    <back-btn state="tab.account"></back-btn>
+  </ion-nav-buttons>
+
+  <ion-content overflow-scroll="false">
+    <ng-form name="feedback_form">
+      <p class="questions-and-comments">
+        问题和意见
+      <span class="feedback-content-length"
+            ng-bind="content_max_length - data.content.length">
+      </span>
+      </p>
+
+
+      <div class="list">
+        <label class="item item-light item-input">
+          <textarea name="feedback" ng-model="data.content" required
+                    maxlength="{{ content_max_length }}" ng-trim="false"
+                    placeholder="请详细表述你的问题或建议，我们将及时跟进与解决。（建议添加相关问题截图）">
+        </label>
+      </div>
+      <p class="add-picture">
+        添加图片（选填，提供问题截图）
+      </p>
+
+      <div class="list">
+        <div class="item item-light item-img">
+          <m-feedback-image img-output="vm.onSelect(file, oldFile)"
+                  ng-repeat="img in data.images" img="img"></m-feedback-image>
+          <m-feedback-image img-output="vm.onSelect(file)" ng-if="data.images.length < images_max_number"></m-feedback-image>
+        </div>
+      </div>
+      <div class="contact">
+        <div>弥财客服电话</div>
+        <div><a href="tel: 01058222982">010-58222982</a></div>
+      </div>
+
+      <div class="button-floating">
+        <button class="button button-block button-positive submit-feedback"
+                ng-disabled="feedback_form.$invalid"
+                on-request="vm.submitFeedback()">
+          提交
+        </button>
+
+      </div>
+    </ng-form>
+  </ion-content>
+</ion-view>

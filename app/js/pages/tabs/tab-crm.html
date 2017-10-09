@@ -1,0 +1,98 @@
+<ion-view view-title="客户管理"
+          class="tab-crm-page"
+          hide-back-button="true">
+
+  <ion-nav-buttons side="primary">
+    <button class="button search-button"
+            ng-if="vm.userLogged"
+            ng-click="vm.search()">
+      <i class="icon unicon-search"></i>
+    </button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="secondary">
+    <button class="button filter-button"
+            ng-click="vm.filter()"
+            ng-if="vm.userLogged">
+      <i class="icon unicon-filter"></i>
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content class="has-support">
+    <div class="toolbar">
+      <div class="text">我的客户</div>
+      <div class="quick-links" ng-if="vm.userLogged">
+        <button role="button"
+                class="button button-clear"
+                ui-sref="reminder"
+                nav-direction="forward">
+          <i class="icon unicon-cake"></i>
+          <span>生日关怀</span>
+        </button><!--
+     --><button role="button"
+                ui-sref="customerForm"
+                nav-direction="forward"
+                class="button button-clear">
+        <i class="icon unicon-new-client"></i>
+        <span>新建客户</span>
+      </button>
+      </div>
+    </div>
+
+    <div ng-if="vm.userLogged">
+      <div class="segment-bar">
+        <div class="segment u-tap "
+             ng-click="vm.switchList('all')"
+             ng-class="{active: vm.tab === 'all'}">
+          <div class="segment-title">全部</div>
+          <div class="segment-info" ng-bind="vm.totalCount"></div>
+        </div>
+        <div class="segment u-tap"
+             ng-click="vm.switchList('important')"
+             ng-class="{active: vm.tab === 'important'}">
+          <div class="segment-title">重要客户</div>
+          <div class="segment-info" ng-bind="vm.importantCount"></div>
+        </div>
+        <div class="segment u-tap"
+             ng-click="vm.switchList('forgotten')"
+             ng-class="{active: vm.tab === 'forgotten'}">
+          <div class="segment-title">被遗忘客户</div>
+          <div class="segment-info" ng-bind="vm.forgottenCount"></div>
+        </div>
+      </div>
+
+      <div class="list">
+        <div class="blank-page"
+             ng-if="vm.customerList.length === 0 && vm.refresher.loaded">
+
+          <button class="button button-positive button-block"
+                  ng-if="vm.totalCount === 0 || vm.tab === 'important'"
+                  ui-sref="customerForm"
+                  nav-direction="forward">
+            点击新增客户
+          </button>
+          <div ng-if="vm.totalCount !== 0 && vm.tab === 'forgotten'">
+            恭喜您已及时跟进客户 <br>
+            如您有超过7天未跟进的客户，我们会在这里提醒您
+          </div>
+        </div>
+        <customer-item-cmp ng-repeat="item in vm.customerList track by item.id"
+                           client="item"
+                           ng-click="vm.forwardDetail(item.id)">
+        </customer-item-cmp>
+      </div>
+    </div>
+
+
+    <div class="blank-page"
+         ng-if="!vm.userLogged">
+      <button ng-click="vm.loginUser()"
+              class="login-btn button button-clear">
+        登录 / 注册
+      </button>
+    </div>
+
+    <support-tel-cmp></support-tel-cmp>
+
+  </ion-content>
+</ion-view>

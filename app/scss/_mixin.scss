@@ -1,0 +1,88 @@
+@mixin vertical-div($top) {
+  position: absolute;
+  top: $top;
+  transform: translateY(-50%);
+}
+
+@mixin cover-background($x-position, $y-position) {
+  background: {
+    size: cover;
+    repeat: no-repeat;
+    position: $x-position $y-position;
+  };
+}
+
+@mixin skinny-border-bottom($color) {
+  background: {
+    image: linear-gradient(to top, $color 0%, $color 51%, transparent 51%);
+    size: 100% 1px;
+    repeat: no-repeat;
+    position-y: 100%;
+  };
+}
+
+// FIXME: if you are using safari
+//   please plase using backdrop-filter instead
+@mixin glass-frost($blur) {
+  filter: blur($blur);
+  transform: scale(1.15);
+}
+
+
+$touch-area-width: 48px;
+@mixin m-nav-icon {
+  width: $touch-area-width;
+  .icon {
+    display: inline-block;
+    &:before {
+      font-size: 17px;
+      line-height: 31px;
+    }
+  }
+}
+
+@mixin light-font {
+  font-family: PingFangSC-Ultralight;
+}
+
+@mixin bold-font {
+  font-family: PingFangSC-Light;
+}
+
+
+@mixin activated {
+  &.activated, &:active {
+    opacity: 0.3;
+  }
+}
+
+@mixin asset-sign {
+  &:before {
+    width: 8px;
+    height: 8px;
+    content: '';
+    display: inline-block;
+    border-radius: 50%;
+  }
+  &.PUBLIC_FUNDS:before {
+    background-color: $noah-public-funds-color;
+  }
+  &.FIXED_INCOME:before {
+    background-color: $noah-fixed-income-color;
+  }
+  &.PRIVATE_EQUITY:before {
+    background-color: $noah-private-equity-color;
+  }
+  &.PRIVATE_PROPERTY:before {
+    background-color: $noah-private-property-color;
+  }
+  &.PRIVATE_EQUITY_SECURITIES:before {
+    background-color: $noah-private-equity-securities-color;
+  }
+  &.FINANCIAL_MANAGEMENT:before {
+    background-color: $noah-financial-management-color;
+  }
+  &.EDUCATION_PROPERTY:before {
+    background-color: $noah-education-property-color;
+  }
+}

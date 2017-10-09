@@ -1,0 +1,30 @@
+risk-return-graph {
+  text.win, text.volatility {
+    text-anchor: middle;
+
+    .value {
+      fill: #000000;
+    }
+
+    .text {
+      fill: #626262;
+    }
+
+    .number {
+      font-size: 15px;
+    }
+  }
+
+  g {
+    circle {
+      stroke: #f5f5f5;
+      stroke-width: 4;
+      fill: none;
+    }
+
+    path {
+      fill: #6a4140;
+    }
+  }
+
+}

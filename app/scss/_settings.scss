@@ -1,0 +1,71 @@
+@import "ionic/scss/variables";
+
+// $ionicons-font-family:            'App-font-icons';
+$ionicons-font-path:              "fonts";
+
+
+$green:                           #62bb28;
+$yellow:                          #f5b723;
+$blue:                            #49aeff;
+$light-blue:                      #99d9ff;
+$red:                             #f24a30;
+$strong-blue:                     #3675fa;
+$icon-grey:                       #bbbbbb;
+$aggressive:                      #d0021b;
+$orange:                          #ff9f00;
+$blue:                            #00a1ff;
+
+$noahRed:                         #E2332F;
+$noahLightRed:                    #F66D60;
+$noahTextCol:                     #673F3F;
+$noahTextLightCol:                #947E7D;
+$noahGrayCol:                     #626262;
+$noahBG:                          #F5F1F0;
+
+$positive:                        $noahTextCol;
+$button-positive-bg:              $noahTextCol;
+
+
+$noah-header-background-color:    #FAFAFA;
+$noah-header-height:              45px;
+$noah-item-height:                40px;
+$noah-item-color:                 #947E7D;
+
+$noah-public-funds-color:         #899AF0;
+$noah-fixed-income-color:         #65A6FF;
+$noah-private-equity-color:       #91C9FD;
+$noah-private-property-color:     #9EE9FF;
+$noah-private-equity-securities-color:  #BBFEF6;
+$noah-financial-management-color: #C0EFA1;
+$noah-education-property-color:   #F6F6F6;
+
+$base-background-color:           #F7F7F7;
+$base-color:                      #9b9b98;
+
+$content-padding:                 15px;
+
+$font-size-12:                    12px;
+$font-size-14:                    14px;
+$font-size-base:                  13px;
+$font-family-base:                PingFangSC-Thin, monospace, sans-serif-light, sans-serif;
+
+$tabs-icon-size:                  24px;
+
+$button-light-text:               #9B9B9B;
+$button-font-size:                17px;
+$scroll-refresh-icon-color:       $dark;
+$spinner-default-stroke:          $light;  
+$spinner-default-fill:            $light;
+
+
+$loading-bg-color:                rgba(0, 0, 0, 0.7);
+$loading-backdrop-bg-color:       rgba(0, 0, 0, 0.4);
+
+
+$modal-bg-color:                  $stable;
+
+$popup-background-color:          white;
+
+$button-height:                   39px;
+$input-color-placeholder:         #9b9b97;
+

@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="button-bar-container padding-horizontal">
+        <div class="button-bar bar-light">
+            <a class="button button-small" ng-class="{selected:$ctrl.mode == 'money'}" ng-click="$ctrl.changeMode('money')">金额</a>
+            <a class="button button-small" ng-class="{selected:$ctrl.mode == 'percentage'}" ng-click="$ctrl.changeMode('percentage')">比例</a>
+        </div>
+        <div class="col tipsText">
+            <div class="help-circle-container" ng-click="$ctrl.showPropertyDesc()">
+                <i class="ion-ios-help-outline"></i>
+            </div>
+            单位: 
+            <span ng-if="$ctrl.mode == 'money'">万元</span>
+            <span ng-if="$ctrl.mode == 'percentage'">%</span>
+        </div>
+    </div>  
+    <u-bar-chart-v2 ng-if="$ctrl.type === 'default'" bar-chart-data="$ctrl.data" mode="$ctrl.mode"></u-bar-chart-v2>
+    <u-bar-chart-v2-ex ng-if="$ctrl.type === 'ex'" bar-chart-data="$ctrl.data" mode="$ctrl.mode"></u-bar-chart-v2-ex>
+</div>

@@ -1,0 +1,19 @@
+<ion-view view-title="资产配置报告书" hide-back-button="true" class="portfolio-book-page white-theme">
+  <ion-nav-buttons>
+    <back-btn state="home"></back-btn>
+  </ion-nav-buttons>
+
+  <ion-content scroll="false">
+    <div class="iframe-container">
+      <iframe ng-if="vm.reportStandardLink" ng-src="{{vm.reportStandardLink}}" frameborder="0" scrolling="auto" height="100%"></iframe>
+    </div>
+  </ion-content>
+
+  <ion-footer-bar>
+      <div class="button-bar row clearPad">
+          <button class="button col col-33" ng-if="!vm.isPdfGenerated" ng-click="vm.saveToBookList()">保存报告</button>
+          <button class="button col col-33" ng-if="vm.isPdfGenerated" ng-click="vm.goToBookList()">历史报告</button>
+          <button class="button col" ng-click="vm.viewKYC()">更精准配置</button>
+      </div>
+  </ion-footer-bar>
+</ion-view>

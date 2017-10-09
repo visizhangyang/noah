@@ -1,0 +1,122 @@
+.book-list-page {
+    .header-box {
+      height: 50px;
+      color: $noahTextLightCol;
+      font-size: 14px;
+      //background-color: $noah-header-background-color;
+      background-color: rgba(245,241,240,0.5);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex: none;
+      padding-left:$content-padding;
+    }
+
+    .noneText{
+        text-align: center;
+        margin-top: 45%;
+        color:$noahTextLightCol;  
+    }
+
+    .pdf-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        padding: {
+            top: 7px;
+            bottom: 7px;
+        }
+        .title {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            color: $noahTextCol;
+        }
+        .icon {
+            margin-right: 10px;
+            width: 30px;
+        }
+        .status {
+            button{
+              opacity: 1;
+            }
+            .failure {
+                color: red;
+                
+            }
+            .processing {
+                color: $dark;
+            }
+            .progress-bar {
+                border-radius: 2px;
+                height: 5px;
+                background-color: white;
+                padding: 1px;
+            }
+            .progress-current {
+                border-radius: 2px;
+                width: 0;
+                height: 3px;
+                background-color: $noahRed;
+                transition: width 1s;
+            }
+        }
+        .button {
+            font-size: 11px;
+            line-height: 10px;
+            min-height: 28px;
+            padding-left: 4px;
+            padding-right: 4px;
+            border-radius: 4px;
+            margin-right: 4px;
+        }
+        .button-red {
+            color: $noahRed;
+            border: $noahRed 1px solid;
+        }
+        .button-gray {
+            color: #D8CECE;
+            border: #D8CECE 1px solid;
+        }
+        .button-red-block {
+            color: white;
+            background-color: $noahRed;
+            line-height: 25px;
+            width: 53px;
+            min-width: 53px;
+            overflow: hidden;
+        }
+    }
+
+    .button-bar{
+        padding:0;
+        .col{
+            font-size:16px;
+            border-radius: 0px;
+            &:first-child {
+                color: #DF3536;
+                background: #FAF7F6
+            }           
+            &:last-child {
+                color: #fff;
+                background: #DF3536;
+            } 
+        }
+    }    
+}
+
+.popup-container {
+    .popup{
+        .popup-head{
+            padding-top:10px;
+        }
+        .popup-buttons{
+            button{
+                color:$noahTextCol;
+                font-size: $font-size-14;
+            }
+        }
+    }
+} 

@@ -1,0 +1,252 @@
+<ion-view view-title="{{vm.title}}"
+      hide-back-button="true"
+      class="kyc-page">
+  <ion-nav-buttons>
+    <back-btn state="home" ng-click="vm.viewHomePage()"></back-btn>
+  </ion-nav-buttons>
+
+    <ion-content>
+      <div class="wrapper">
+        <div class="header-box">
+          {{vm.userBaseInfo.realName}} {{vm.userBaseInfo | investorStatus}} {{vm.userBaseInfo.riskText}}
+        </div>
+
+        <div>
+        <div class="kyc-steps-wrapper row">
+          <div class="col col-70">
+              <kyc-steps step="vm.step"></kyc-steps>
+          </div>
+          <div class="col">
+              <button class="button" ng-click="vm.viewHomePage()">推荐配置</button>
+          </div>
+        </div>
+        </div>
+
+        <div class="container">
+          <div ng-switch="vm.step">
+            <!--风险承受度-->
+            <div ng-switch-when="1" class="risk-analysis">
+              <risk-return-graph risk-level="vm.riskLevel" win="vm.returnData[vm.riskLevel - 1].win" volatility="vm.returnData[vm.riskLevel - 1].volatility"></risk-return-graph>
+
+              <div class="custom-slider-container">
+                <div class="custom-range-slider">
+                  <div class="range-tick" ng-class="{ 'selected': vm.riskLevel == 1 }" style="left: 0%;">1</div>
+                  <div class="range-tick" ng-class="{ 'selected': vm.riskLevel == 2 }" style="left: 11.1111%;">2</div>
+                  <div class="range-tick" ng-class="{ 'selected': vm.riskLevel == 3 }" style="left: 22.2222%;">3</div>
+                  <div class="range-tick" ng-class="{ 'selected': vm.riskLevel == 4 }" style="left: 33.3333%;">4</div>
+                  <div class="range-tick" ng-class="{ 'selected': vm.riskLevel == 5 }" style="left: 44.4444%;">5</div>
+                  <div class="range-tick" ng-class="{ 'selected': vm.riskLevel == 6 }" style="left: 55.5556%;">6</div>
+                  <div class="range-tick" ng-class="{ 'selected': vm.riskLevel == 7 }" style="left: 66.6667%;">7</div>
+                  <div class="range-tick" ng-class="{ 'selected': vm.riskLevel == 8 }" style="left: 77.7778%;">8</div>
+                  <div class="range-tick" ng-class="{ 'selected': vm.riskLevel == 9 }" style="left: 88.8889%;">9</div>
+                  <div class="range-tick" ng-class="{ 'selected': vm.riskLevel == 10 }" style="left: 100%;">10</div>
+                </div>
+              </div>
+
+              <div class="range">
+                <input type="range" name="riskLevel" min="1" max="10" ng-model="vm.riskLevel">
+              </div>
+
+              <div class="risk-level-text">
+                <span ng-if="vm.extRiskLevel == 1">
+                  您的风险承担能力水平比较低，您关注资产的安全性远超于资产的收益性。
+                </span>
+                <span ng-if="vm.extRiskLevel == 2">
+                  您有比较有限的风险承受能力，对投资收益比较敏感，期望通过短期、持续、渐进的投资获得高于定期存款的回报。
+                </span>
+                <span ng-if="vm.extRiskLevel == 3">
+                  您有一定的风险承受能力，对投资收益比较敏感，期望通过长期且持续的投资获得高于平均水平的回报，通常更注重十年甚至更长期限内的平均收益。
+                </span>
+                <span ng-if="vm.extRiskLevel == 4">
+                  您有中高的风险承受能力，愿意承担可预见的投资风险去获取更多的收益，一般倾向于进行中短期投资。
+                </span>
+                <span ng-if="vm.extRiskLevel == 5">
+                  您有较高的风险承受能力，在投资收益波动的情况下仍然保持积极进取的投资理念，适合从事灵活、风险与报酬都比较高的投资，同时需注意做好风险管理与资金调配工作。
+                </span>
+
+              </div>
+
+            </div>
+            <!--财务状况-->
+            <div ng-switch-when="2">
+              <div class="finance-status">
+                <h4>您的财务状况，有助于我们提供更符合您的资产配置：</h4>
+                <money-slide middle="100" value="vm.assetAllocation.annual_income || 0" on-change="vm.onChangeIncome(value)" label="'年收入'"></money-slide>
+                <money-slide middle="100" value="vm.assetAllocation.annual_expenditure || 0" on-change="vm.onChangeExpenditure(value)" label="'年支出'"></money-slide>
+                <money-slide middle="100" value="vm.assetAllocation.liability || 0" on-change="vm.onChangeLiability(value)" label="'负债'"></money-slide>
+                <money-slide middle="100" min="0" max="500" is-linear="true" value="vm.assetAllocation.yearly_repayment || 0" on-change="vm.onChangeRepayment(value)"
+                    label="'每年偿还额'"></money-slide>
+              </div>
+            </div>
+            <!--保障需求-->
+            <div ng-switch-when="3" class="insurance">
+              <div class="client-wrapper">
+                <div class="item-select">
+                  <div class="input-label">
+                    客户性别：
+                  </div>
+                  <select ng-model="vm.clientInfo.gender" ng-options="gender.value as gender.name for gender in vm.clientGenderOptions">
+                  </select>
+                </div>
+                <div class="item-select">
+                  <div class="input-label">
+                    客户年龄：
+                  </div>
+                  <select ng-model="vm.clientInfo.age" ng-options="age as age for age in vm.clientAgeOptions">
+                  </select>
+                </div>
+              </div>
+              <money-slide min="18" adjust-min="vm.clientInfo.age || 18" max="70" value="vm.assetAllocation.retirement_age || vm.clientInfo.age || 30" on-change="vm.onChangeRetirementAge(value)" label="'理想退休年龄'" is-linear="true" slide-type="'age'" ></money-slide>
+              <money-slide middle="100" value="vm.assetAllocation.annual_expenditure || 0" on-change="vm.onChangeAnnualExpenditure(value)" label="'预计退休每年支出'"></money-slide>
+              <money-slide min="0" max="100" value="vm.assetAllocation.personal_income_family_income_share || 0" on-change="vm.onChangeIncomeRatio(value)" label="'个人收入占家庭收入比例'" is-linear="true" slide-type="'percentage'"></money-slide>
+              <money-slide middle="100" max="100000" value="vm.assetAllocation.children_education_budget || 0" on-change="vm.onChangeChildrenEducationBudget(value)" label="'子女规划'"></money-slide>
+              <money-slide middle="100" max="1000000" value="vm.assetAllocation.inheritance_amount || 0" on-change="vm.onChangeInheritanceAmount(value)" label="'遗产传承'"></money-slide>
+              <!--
+              <div class="medical-standard-wrapper item-select">
+                <div class="input-label">
+                  期望医疗标准
+                </div>
+                <select ng-model="vm.assetAllocation.expect_medical_standards" ng-options="mso.value as mso.name for mso in vm.medicalStandardOptions">
+                </select>
+              </div>
+              -->
+            </div>
+            <!--教育规划-->
+            <div ng-switch-when="4" class="education-all">
+              <ion-list ng-repeat="(index,items) in vm.course">
+                <!--Rank-->
+                <ion-item class="type-style-rank" ng-if="items.display_form == 3">
+                  <h2><label>{{index+1}}</label> : {{items.text}}</h2>
+                  <small ng-hide="items.children.length == 0">(<label ng-repeat="subTitle in items.children">{{subTitle.text}}/</label>)</small>
+                  <div class="row">
+                    <div class="col col-50"><input type="text" ng-click="vm.ionicActionSheet(items,index,$event,1)" ng-model="items.default_seleted_text[0].text" readonly="readonly" placeholder="请点击选择首选项"/></div>
+                    <div class="col col-50"><input type="text" ng-click="vm.ionicActionSheet(items,index,$event,2)" ng-model="items.default_seleted_text[1].text" readonly="readonly" placeholder="请点击选择次选项"/></div>
+                  </div>
+                  <item-list ng-hide="items.children[0].children.length == 0">
+                    <item-black ng-repeat="(i,d) in items.children" ng-if="i == items.default_seleted_text[0].depth && items.default_seleted_text[0].depth != ''">
+                      <h2>{{index+1}}.1: {{d.text}}</h2>
+                      <small ng-if="d.children.length != 0">(<label ng-repeat="sub in d.children">{{sub.text}}/</label>)</small>
+                      <div class="row">
+                        <div class="col col-50"><input type="text" ng-click="vm.ionicActionSheet(d,i,$event,1)" ng-model="d.default_seleted_text[0].text" readonly="readonly" placeholder="请点击选择首选项"/></div>
+                        <div class="col col-50"><input type="text" ng-click="vm.ionicActionSheet(d,i,$event,2)" ng-model="d.default_seleted_text[1].text" readonly="readonly" placeholder="请点击选择次选项"/></div>
+                      </div>
+                    </item-black>
+                    <item-black ng-repeat="(i,d) in items.children" ng-if="i == items.default_seleted_text[1].depth  && items.default_seleted_text[1].depth != ''">
+                      <h2>{{index+1}}.2: {{d.text}}</h2>
+                      <small ng-if="d.children.length != 0">(<label ng-repeat="sub in d.children">{{sub.text}}/</label>)</small>
+                      <div class="row">
+                        <div class="col col-50"><input type="text" ng-click="vm.ionicActionSheet(d,i,$event,1)" ng-model="d.default_seleted_text[0].text" readonly="readonly" placeholder="请点击选择首选项"/></div>
+                        <div class="col col-50"><input type="text" ng-click="vm.ionicActionSheet(d,i,$event,2)" ng-model="d.default_seleted_text[1].text" readonly="readonly" placeholder="请点击选择次选项"/></div>
+                      </div>
+                    </item-black>
+                  </item-list>
+                </ion-item>
+                <!--multiple-->
+                <ion-item class="type-style-multiple" ng-if="items.display_form == 2 ">
+                  <h2><label>{{index+1}}</label> : {{items.text}}</h2>
+                  <div class="row">
+                  <ion-checkbox ng-repeat="item in items.children"
+                                ng-model="item.checked_flag"
+                                ng-checked="item.checked_flag">
+                    {{ item.text }}
+                  </ion-checkbox>
+                  </div>
+                </ion-item>
+                <!--single-->
+                <ion-item class="type-style-single" ng-if="items.display_form == 1">
+                  <h2><label>{{index+1}}</label> : {{items.text}}</h2>
+                      <div class="row">
+                        <ion-radio ng-repeat="(index,item) in items.children" name="radio_{{item.up_level_tag_id_id}}" id="rb_{{item.up_level_tag_id_id}}"
+                          ng-change="vm.radioChange(index,items)"
+                          ng-value="true"
+                          ng-model="item.checked_flag">{{item.text}}
+                        </ion-radio>
+                      </div>
+                </ion-item>
+              </ion-list>
+            </div>
+            <!--投资全貌-->
+            <div ng-switch-when="5" class="investment-all">
+            <div class="header">
+              如果您有其他投资，请在这里增加信息：
+              <div class="help-circle-container" ng-click="vm.showPropertyDesc()">
+                  <i class="ion-ios-help-outline"></i>
+              </div>
+            </div>
+            <div class="asset-wrapper">
+              <div class="asset-sign-wrapper PUBLIC_FUNDS"></div>
+              <money-slide
+                adjust-min="vm.assetAllocation.public_funds" 
+                middle="100" value="vm.assetData.public_funds || 0" 
+                tip="'+' + (vm.assetData.public_funds - vm.assetAllocation.public_funds) + '万'" 
+                on-change="vm.onChangePublicFunds(value)" 
+                label="'公募基金'"></money-slide>
+            </div>
+            <div class="asset-wrapper">
+              <div class="asset-sign-wrapper FIXED_INCOME"></div>
+              <money-slide 
+              adjust-min="vm.assetAllocation.fixed_income" 
+              middle="100" value="vm.assetData.fixed_income || 0"
+              tip="'+' + (vm.assetData.fixed_income - vm.assetAllocation.fixed_income) + '万'" 
+              on-change="vm.onChangeFixedIncome(value)" 
+              label="'类固收'"></money-slide>
+            </div>
+            <div class="asset-wrapper">
+              <div class="asset-sign-wrapper PRIVATE_EQUITY"></div>
+              <money-slide 
+              adjust-min="vm.assetAllocation.private_equity" 
+              middle="100" value="vm.assetData.private_equity || 0" 
+              tip="'+' + (vm.assetData.private_equity - vm.assetAllocation.private_equity) + '万'" 
+              on-change="vm.onChangePrivateEquity(value)" 
+              label="'私募股权'"></money-slide>
+            </div>
+            <div class="asset-wrapper">
+              <div class="asset-sign-wrapper PRIVATE_PROPERTY"></div>
+              <money-slide 
+              adjust-min="vm.assetAllocation.private_property" 
+              middle="100" value="vm.assetData.private_property || 0"
+              tip="'+' + (vm.assetData.private_property - vm.assetAllocation.private_property) + '万'" 
+              on-change="vm.onChangePrivateProperty(value)" 
+              label="'房地产基金'"></money-slide>
+            </div>
+            <div class="asset-wrapper">
+              <div class="asset-sign-wrapper PRIVATE_EQUITY_SECURITIES"></div>
+              <money-slide 
+              adjust-min="vm.assetAllocation.private_equity_securities" 
+              middle="100" value="vm.assetData.private_equity_securities || 0"
+              tip="'+' + (vm.assetData.private_equity_securities - vm.assetAllocation.private_equity_securities) + '万'" 
+              on-change="vm.onChangePrivateEquitySecurities(value)"
+              label="'二级市场'"></money-slide>
+            </div>
+            <div class="asset-wrapper">
+              <div class="asset-sign-wrapper FINANCIAL_MANAGEMENT"></div>
+              <money-slide 
+              adjust-min="vm.assetAllocation.financial_management" 
+              middle="100" value="vm.assetData.financial_management || 0"
+              tip="'+' + (vm.assetData.financial_management - vm.assetAllocation.financial_management) + '万'" 
+              on-change="vm.onChangeFinancialManagement(value)"
+              label="'理财'"></money-slide>
+            </div>
+          </div>
+          </div>
+          <!--
+          <div class="button-bar">
+            <button class="button" ng-disabled="vm.step == 1" ng-click="vm.prev()">上一项</button>
+            <button class="button" ng-if="vm.step < 5" ng-click="vm.next()">下一项</button>
+            <button class="button" ng-if="vm.step == 5" ng-click="vm.complete()">完成</button>
+          </div>
+          -->
+        </div>
+      </div>
+
+    </ion-content>
+
+    <ion-footer-bar>
+          <div class="button-bar">
+            <button class="button" ng-disabled="vm.step == 1" ng-click="vm.prev()">上一项</button>
+            <button class="button" ng-if="vm.step < 5" ng-click="vm.next()">下一项</button>
+            <button class="button" ng-if="vm.step == 5" ng-click="vm.complete()">完成</button>
+          </div>
+    </ion-footer-bar>
+
+</ion-view>

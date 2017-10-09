@@ -1,0 +1,37 @@
+{
+  "name": "unicorn",
+  "app_id": "",
+  "documentRoot": "build/dist",
+  "createDocumentRoot": "build/dist",
+  "watchPatterns": [
+    "build/dist/*",
+    "!build/dist/**/*.map",
+    "!build/dist/**/*.json"
+  ],
+  "proxies": [
+    {
+      "path": "/api/",
+      "proxyUrl": "http://noah-dev.micai.local/api/"
+    },
+    {
+      "path": "/private_media/",
+      "proxyUrl": "http:/noah-dev.micai.local/private_media/"
+    },
+    {
+      "path": "/media/",
+      "proxyUrl": "http://localhost:8000/media/"
+    },
+    {
+      "path": "/proposal_book/",
+      "proxyUrl": "http://localhost:8000/proposal_book/"
+    },
+    {
+      "path": "/static/",
+      "proxyUrl": "http://localhost:8000/static/"
+    }
+  ],
+  "type": "ionic1",
+  "integrations": {
+    "gulp": {}
+  }
+}

@@ -1,0 +1,144 @@
+.product-cmp {
+  @include proposal-portfolio-common();
+    .financial-box {
+        padding-bottom: 50px;
+    }
+
+    .button-bar-container {
+        margin: 12px 0 5px 0;
+        display: flex;
+        justify-content: flex-end;
+        .button-bar {
+            flex: initial;
+            width: 120px;
+            padding:2px;
+            background-color: $noahBG;
+            border-radius: 3px;
+            .button.selected {
+                background-color: #ffffff;
+                color: $noahRed;
+            };
+            .button{
+                background-color: $noahBG;
+                border: 0;
+                color: $noahTextCol;
+                line-height: 22px;
+                min-height: 22px;
+            }
+        }
+        .tipsText{
+            justify-content: center;
+            text-align: right;
+            color: #F4776F;
+        }
+    }
+   .group-header {
+        margin-top: 1px;
+        background-color: #FFF;
+        border-bottom: 1px solid #F0F0F0;
+        color: $noahTextCol;
+        font-size: 14px;
+        display: flex;
+        .dot {
+            width: 15px;
+            &:before {
+                width: 8px;
+                height: 8px;
+                content: '';
+                display: inline-block;
+                border-radius: 50%;
+            }
+            &.PUBLIC_FUNDS:before {
+                background: $public_funds;
+            }
+            &.FIXED_INCOME:before {
+                background: $fixed_income;
+            }
+            &.PRIVATE_EQUITY:before {
+                background: $private_equity;
+            }
+            &.PRIVATE_PROPERTY:before {
+                background: $private_property;
+            }
+            &.PRIVATE_EQUITY_SECURITIES:before {
+                background: $private_equity_securities;
+            }
+            &.FINANCIAL_MANAGEMENT:before {
+                background: $financial_management;
+            }
+            &.EDUCATION_PROPERTY:before {
+                background: $education_property;
+            }
+        }
+        .info {
+            flex: 1;
+
+            .diff-message {
+              font-size: 12px;
+              color: #F66D60;
+              margin-left: 20px;
+            }
+        }
+        .selected-count {
+            text-align: right;
+        }
+        .chevron {
+            width: 20px;
+            text-align: right;
+            .ion-chevron-down {
+                transition: transform .25s;
+                color: #9B9B9B;
+                &.active {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+    .group-body {
+        .row {
+            color: $noahTextLightCol;
+            font-size: 12px;
+            margin-top: 1px;
+            border-bottom: 1px solid #F0F0F0;
+            align-items: center;
+
+            .col {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                &:not(:first-child):not(:last-child) {
+                    text-align: center;
+                }
+                &:last-child {
+                    text-align: right;
+                }
+                .help-circle-container {
+                    display: inline-block;
+                    width: 40px;
+                    height: 40px;
+                    font-size: 16px;
+                    margin-left: -20px;
+                    .ion-ios-help-outline {
+                        vertical-align: text-bottom;
+                    }
+                }
+            }
+
+            .amount {
+              input {
+                display: inline-block;
+                width: 50px;
+                text-align: right;
+                margin-top: -7px;
+                font-size: 12px;
+              }
+
+              span {
+                display: inline-block;
+                position: relative;
+                top: -3px;
+                font-size: 10px;
+              }
+            }
+        }
+    }
+}

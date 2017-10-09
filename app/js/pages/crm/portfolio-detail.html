@@ -1,0 +1,27 @@
+<ion-view view-title="配置详情" hide-back-button="true" class="customer-detail-page">
+
+  <ion-nav-buttons>
+    <back-btn></back-btn>
+  </ion-nav-buttons>
+
+  <ion-content class="portfolio-detail">
+
+    <div class="header">
+      <div class="item-field item-field-sign"></div>
+      <div class="item-field item-field-asset-class font-size-normal">资产类别</div>
+      <div class="item-field item-field-current font-size-normal">目前配置<br /><span class="font-size-small">(万元)</span></div>
+      <div class="item-field item-field-suggest font-size-normal">推荐配置<br /><span class="font-size-small">(万元)</span></div>
+      <div class="item-field item-field-adjust font-size-normal">建议调整<br /><span class="font-size-small">(万元)</span></div>
+    </div>
+
+    <div class="item" ng-repeat="assetCode in vm.assetCodeList || []">
+      <div class="item-field item-field-sign font-size-normal {{assetCode}}"></div>
+      <div class="item-field item-field-asset-class font-size-normal">{{assetCode|transAsset}}</div>
+      <div class="item-field item-field-current font-size-normal">{{vm.data.current_status[assetCode][0]|formatMoney}}</div>
+      <div class="item-field item-field-suggest font-size-normal">{{vm.isNotApplicable(assetCode) ? "/" : vm.data.target_status[assetCode][0]|formatMoney}}</div>
+      <div class="item-field item-field-adjust font-size-normal">{{vm.isNotApplicable(assetCode) ? "/" : vm.data.suggest_adjustment[assetCode][0]|formatMoney:true}}</div>
+    </div>
+
+  </ion-content>
+
+</ion-view>

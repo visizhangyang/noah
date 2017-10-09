@@ -1,0 +1,29 @@
+<ion-view view-title=""
+          hide-nav-bar="true"
+          class="landing-page"
+          hide-back-button="true">
+
+  <ion-content scroll="false">
+    <div class="container" ng-if="vm.ready">
+      <img class="landing-bg"
+           ng-src="public/landing.jpg">
+      <div class="bottom-block">
+        <div class="text-rect">
+          <div class="title">弥财 － 阿波罗</div>
+          <div>用金融技术的创新为合作伙伴创造价值</div>
+        </div>
+        <div class="button-bar">
+          <button class="button" ng-click="vm.onLogin()">
+            登录弥财
+          </button>
+          <button class="button" ng-click="vm.onSignup()">
+            立即注册
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </ion-content>
+</ion-view>
+

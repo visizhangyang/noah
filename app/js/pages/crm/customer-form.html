@@ -1,0 +1,42 @@
+<ion-view view-title="创建客户"
+          hide-back-button="true"
+          class="customer-form-page">
+  <ion-nav-buttons>
+    <back-btn state="tab.crm"></back-btn>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <form class="m-form"
+          name="form"
+          novalidate>
+      <div class="list margin-top">
+        <ion-input class="item item-input">
+          <ion-label>客户名称 <span class="required">*</span></ion-label>
+          <input type="text"
+                 placeholder="必填"
+                 ng-change="vm.formUtil.onInputChange(form)"
+                 ng-model="vm.formUtil.data.name"
+                 name="customerName"
+                 required>
+        </ion-input>
+        <ion-input class="item item-input">
+          <ion-label>出生年月  <span class="required">*</span></ion-label>
+          <input type="date" ng-model="vm.formUtil.data.birthday" ng-click="vm.setDefaultBirthday()" required name="birthday" />
+        </ion-input>
+
+        <div class="error">
+        </div>
+      </div>
+
+      <div class="block-btn-div">
+        <button class="button button-block button-positive"
+                on-request="vm.goNext($event, form.$valid)"
+                ng-disabled="form.$invalid">
+          下一步
+        </button>
+      </div>
+    </form>
+
+  </ion-content>
+
+</ion-view>

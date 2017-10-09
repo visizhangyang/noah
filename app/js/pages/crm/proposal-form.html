@@ -1,0 +1,94 @@
+<ion-view view-title="产品调整"
+          hide-back-button="true"
+          class="proposal-form-page white-theme">
+  <ion-nav-buttons>
+    <back-btn state="tab.crm"></back-btn>
+  </ion-nav-buttons>
+
+
+  <ion-nav-buttons side="secondary">
+    <button class="button filter-button"
+            ui-sref="productQuickNew"
+            nav-direction="forward">
+      <i class="icon unicon-plus"></i>
+    </button>
+  </ion-nav-buttons>
+
+  <form class="m-form" name="form" novalidate>
+    <ion-content>
+
+      <ion-toggle toggle-class="toggle-white-u"
+                  ng-model="vm.isCompany"
+                  ng-change="vm.toggleCompany()">
+        是否只显示公司产品
+      </ion-toggle>
+      <ion-scroll scrollbar-x="false" zooming="false" direction="x" class="scroll-container" >
+        <div class="segment-bar">
+          <div class="segment-btn" ng-repeat="tab in vm.tabs"
+               ng-click="vm.switchTab(tab)"
+               ng-class="{active: tab.key === vm.selectedTab}">
+            {{ tab.text }}
+          </div>
+        </div>
+      </ion-scroll>
+
+      <div ng-if="vm.productsMap">
+        <div ng-repeat="tab in vm.tabs" ng-show="tab.key === vm.selectedTab">
+          <div class="item proposal-item item-set-5 item-white" ng-if="vm.productsMap[vm.selectedTab]">
+            <div class="item-field item-field-checkbox"></div>
+            <div class="item-field item-field-is-company"></div>
+            <div class="item-field">产品名称</div>
+            <div class="item-field">历史年化</div>
+            <div class="item-field item-field-risk">风险等级</div>
+            <div class="item-field item-field-amount">金额</div>
+          </div>
+
+          <div ng-repeat="product in vm.productsMap[vm.selectedTab]">
+            <div class="item proposal-item item-set-5 item-white">
+              <div class="item-field item-field-checkbox" ng-click="vm.computeTab(null, vm.selectedTab)">
+                <label class="item item-checkbox" ng-hide="product.selected === undefined ">
+                  <div class="checkbox checkbox-input-hidden checkbox-circle">
+                    <input type="checkbox" class="ng-untouched" ng-model="product.selected" />
+                    <i class="checkbox-icon"></i>
+                  </div>
+                </label>
+              </div>
+              <div class="item-field item-field-is-company" ng-class="{'is-company': !!product.company}">&nbsp;</div>
+              <div class="item-field">{{ product.product_name }}</div>
+              <div class="item-field" ng-if="product.return_rate">{{ product.return_rate | formatPercent }}%</div>
+              <div class="item-field" ng-if="!product.return_rate">浮动</div>
+              <div class="item-field item-field-risk">{{ product.risk_level | transRiskLevel }}</div>
+              <div class="item-field item-field-amount">
+                <button class="icon ion-minus" ng-click="vm.adjustAmount(product, false)" ng-disabled="product.amount <= product.min_investment || product.amount == null"></button>
+                <input class="txt" type="number" ng-model="product.amount" ng-change="vm.changeAmount(product)"><span>万</span>
+                <button class="icon ion-plus" ng-click="vm.adjustAmount(product, true)"></button>
+              </div>
+            </div>
+
+          </div>
+          <div class="item item-white" ng-if="!vm.productsMap[vm.selectedTab]">
+            暂无产品可选
+          </div>
+        </div>
+
+      </div>
+
+      <div class="error">
+        <div ng-if="vm.formUtil.submitError">
+            <span>
+              {{ vm.formUtil.submitError }}
+            </span>
+        </div>
+      </div>
+    </ion-content>
+
+
+    <ion-footer-bar>
+      <button class="button button-full button-positive"
+              on-request="vm.onSubmit($event, form.$valid)"
+              ng-disabled="form.$invalid || vm.pickedCount === 0">
+        已选定{{ vm.pickedCount }}支
+      </button>
+    </ion-footer-bar>
+  </form>
+</ion-view>

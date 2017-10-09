@@ -1,0 +1,58 @@
+<ion-view view-title="优化" hide-back-button="true" class="proposal-page white-theme" cache-view="false">
+    <ion-nav-buttons>
+        <back-btn state="tab.crm"></back-btn>
+    </ion-nav-buttons>
+
+    <ion-content class="portfolio-analysis">
+        <div class="overlay-box">
+            <div class="content-over-overlay compare-section">
+                <div class="row compare-banner">
+                    <div class="col portfolio">
+                        <button ng-click="vm.choosePortfolio()" class="button button-small button-clear button-dark" ng-class="{'inactive' : vm.isPageCompareStateChooseCompareIndex()}">
+                            {{vm.portfolioCurrent.name}}
+                            <i class="ion ion-chevron-down" ng-class="{'active' : vm.isPageCompareStateChoosePortfolio()}"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row select-options-box" ng-if="vm.isPageCompareStateChoosePortfolio()">
+                    <div class="col col-33" ng-repeat="item in vm.portfolioList">
+                        <button class="button button-small button-clear button-dark" on-request="vm.choosePortfolioByIndex($index)">{{item.name}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="content-under-overlay">
+                <div class="overlay" ng-class="{'active' : vm.pageCompareState != null}" ng-click="vm.hideCompareOverlay()">
+                </div>
+                <div class="option-bar">
+                    <div class="button-bar bar-light">
+                        <button class="button button-outline button-positive button-small" ng-class="{actived : item == vm.profileOptionCurrent}"
+                            ng-repeat="item in vm.profileOptionList" on-request="vm.chooseProfileOption($index)">{{item.name}}</button>
+                    </div>
+                </div>
+                <div class="period-bar">
+                    <div class="button-bar bar-light">
+                        <button class="button button-outline button-positive button-small" ng-class="{actived : item == vm.currentPeriod}" ng-repeat="item in vm.periodList"
+                            on-request="vm.selectPeriod($index)">{{item.label}}</button>
+                    </div>
+                </div>
+
+                <risk-adjustment-chart-component ng-if="vm.profileChartData" on-change="vm.handleRiskAdjustmentChanged(portfolio_history, products)"
+                    data="vm.profileChartData"></risk-adjustment-chart-component>
+                <div class="product-list" ng-if="vm.portfolioProductsCurrentState">
+                    <div class="row padding-horizontal header">
+                        <div class="col col-75">产品名称</div>
+                        <div class="col text-right">持仓调整</div>
+                    </div>
+                    <div class="row padding-horizontal product" ng-repeat="item in vm.portfolioProductsCurrentState">
+                        <div class="col col-75">{{item.name}}</div>
+                        <div class="col text-right">{{item.adjust*100 | formatPercent}}%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar>
+        <button class="button button-full button-positive" on-request="vm.save()" ng-disabled="vm.portfolioProductsCurrentState == null"
+            ng-class="{inactive:vm.portfolioProductsCurrentState == null}">接受调整</button>
+    </ion-footer-bar>
+</ion-view>

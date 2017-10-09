@@ -1,0 +1,7 @@
+{
+  "apiBaseUrl": "https://noah-dev.micaiapp.com/app/",
+  "riskLevelRedirect": "/noah-risk-level-test",
+  "riskLevelRedirectWithNextUrl": "/noah-risk-level-test?nextUrl=http://xxxx",
+  "restfulDirectMode": false,
+  "isNativeApp": true
+}

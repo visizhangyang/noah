@@ -1,0 +1,52 @@
+kyc-steps {
+
+  path.connect-line {
+    stroke: #E74C45;
+    stroke-width: 2;
+    opacity: 0.25;
+  }
+
+  g.done {
+    fill: #E74C45;
+
+    circle {
+      fill-opacity: 0.2;
+    }
+  }
+
+  g.place-holder {
+    display: none;
+  }
+
+  g.current, g.to-do {
+    text {
+      font-family: SourceHanSansCN-Normal, Source Han Sans CN;
+      font-size: 20px;
+      font-weight: normal;
+    }
+  }
+
+  g.current {
+    circle {
+      fill: #E74C45;
+    }
+
+    text {
+      fill: #FFFFFF;
+    }
+  }
+
+  g.to-do {
+    circle {
+      stroke: #E74C45;
+      stroke-width: 2;
+      opacity: 0.2;
+    }
+
+    text {
+      opacity: 0.5;
+      fill: #E74C45;
+    }
+  }
+
+}

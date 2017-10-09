@@ -1,0 +1,48 @@
+<ion-modal-view class="product-search-modal">
+  <ion-header-bar>
+    <div class="buttons">
+      <button class="button back-button"
+              ng-click="vm.cancel()">
+        <i class="icon ion-back"></i>
+      </button>
+    </div>
+    <h1 class="title">产品搜索</h1>
+
+  </ion-header-bar>
+
+  <div class="search-toolbar">
+    <div class="search-input">
+      <input
+        autocapitalize="off"
+        autocorrect="off"
+        spellcheck="false"
+        placeholder="输入产品名称或发行机构"
+        type="search"
+        ng-model="vm.searchQuery"
+        ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 800, 'blur': 0 } }"
+        ng-change="vm.query()"
+        autocomplete="off" />
+      <i class="icon ion-search"></i>
+    </div>
+    <button class="button button-clear cancel-search"
+            ng-click="vm.reset()">
+      取消
+    </button>
+  </div>
+
+  <ion-content>
+
+
+    <product-item ng-repeat="product in vm.productList"
+                  user="vm.user"
+                  product="product">
+    </product-item>
+
+    <div class="mismatch-hint" ng-if="vm.mismatch">
+      没有找到相对应的产品
+      <br>
+      可以尝试其他产品名称、发行机构
+    </div>
+
+  </ion-content>
+</ion-modal-view>

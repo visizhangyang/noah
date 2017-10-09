@@ -1,0 +1,52 @@
+<div class="product-cmp">
+    <div class="button-bar-container padding-horizontal">
+        <div class="button-bar bar-light">
+            <a class="button button-small" ng-class="{selected:$ctrl.mode == 'money'}" ng-click="$ctrl.changeMode('money')">金额</a>
+            <a class="button button-small" ng-class="{selected:$ctrl.mode == 'percentage'}" ng-click="$ctrl.changeMode('percentage')">比例</a>
+        </div>
+    </div>
+      <div class="list">
+            <div ng-repeat="(index,group) in $ctrl.groupsList || []">
+                <div class="group-header padding" ng-click="$ctrl.toggleGroup(group)">
+                  <div class="dot {{group.code}}"></div>
+                  <div class="info">
+                      {{ group.code | transAsset }}
+                      <span class="diff-message" ng-if="group.diff < 0">[您尚有{{ -group.diff }}万元未分配]</span>
+                      <span class="diff-message" ng-if="group.diff > 0">[您有{{ group.diff }}万元超出限额]</span>
+                  </div>
+                  <div ng-if="index != 6">
+                    <div class="selected-count" ng-if="$ctrl.mode == 'money'">{{group.amount}}万元</div>
+                    <div class="selected-count" ng-if="$ctrl.mode == 'percentage'">{{group.percentage | formatPercent }}%</div>
+                  </div>
+                  <div class="chevron"><i class="ion ion-chevron-down" ng-class="{'active' : group.open}"></i></div>
+                </div>
+                <div class="group-body padding-horizontal" ng-if="group.open">
+                  <div ng-repeat="product in group.products">
+                      <div class="row" ng-if="index != 6">
+                        <div class="col col-25">
+                            {{product.product_name}}
+                        </div>
+                        <div ng-if="$ctrl.isPlaceholderProduct(product)" class="col col-10">
+                            <div class="help-circle-container" ng-click="$ctrl.showProductPlaceholderTip()">
+                                <i class="ion-ios-help-outline"></i>
+                            </div>
+                        </div>
+                        <div class="col col-25"><span class="risklevel">风险等级：<br />{{$ctrl.isPlaceholderProduct(product) ? '/' : product.risk_level}}</span></div>
+                        <div class="col amount" ng-class="$ctrl.isPlaceholderProduct(product) ? 'col-30' : 'col-50'" ng-if="$ctrl.mode == 'money'">
+                            <button ng-if="!$ctrl.isPlaceholderProduct(product)" class="change-amount-icon ion-minus" ng-click="$ctrl.adjustAmount(group, product, false)" ng-disabled="product.amount <= product.min_investment || product.amount == null || group.products.length == 1"></button>
+                            <input class="input" type="number" ng-change="$ctrl.changeAmount(group, product)" ng-model="product.amount" ng-model-options="{ debounce: 150 }" ng-disabled="group.products.length == 1">
+                            <span>万元</span>
+                            <button ng-if="!$ctrl.isPlaceholderProduct(product)" class="change-amount-icon ion-plus" ng-click="$ctrl.adjustAmount(group, product, true)" ng-disabled="group.products.length == 1"></button>
+                        </div>
+                        <div class="col col-40" ng-if="$ctrl.mode == 'percentage'">{{product.percentage * 100 | formatPercent}}%</div>
+                      </div>
+                      <div class="row" ng-if="index == 6">
+                         <div class="col col-50">{{product.class_name}}</div>
+                         <div class="col col-30">{{product.class_location}}</div>
+                         <div class="col col-20">{{product.required_time}}</div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+</div>

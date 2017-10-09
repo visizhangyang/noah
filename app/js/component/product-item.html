@@ -1,0 +1,40 @@
+<div class="product-item card padding-horizontal" ui-sref="productDetail({productId: $ctrl.product.id})" nav-direction="forward">
+  <div class="heading padding-horizontal">
+    {{ $ctrl.product.product_name }}
+    <div class="label-slot-container" ng-if="$ctrl.slot">
+      <div class="label-slot" ng-class="$ctrl.slot.className">
+        <div class="label-slot-text" ng-bind="$ctrl.slot.text"></div>
+      </div>
+    </div>
+  </div>
+  <div class="padding-horizontal">
+    <div class="divider"></div>
+  </div>
+  <div class="product-body padding">
+    <div class="row value-row">
+      <div class="col">
+        <div class="return-rate percentage" ng-if="$ctrl.maximum_expect_rate">{{ $ctrl.maximum_expect_rate }}</div>
+        <div class="return-rate" ng-if="!$ctrl.maximum_expect_rate">浮动</div>
+      </div>
+      <div class="col">
+        <div class="investment_period percentage" ng-if="$ctrl.product.investment_period">{{ $ctrl.product.investment_period }}</div>
+        <div class="investment_period" ng-if="!$ctrl.product.investment_period">_ _</div>
+      </div>
+      <div class="col">
+        <div class="min_investment" ng-if="$ctrl.product.min_investment">{{ $ctrl.product.min_investment }}万</div>
+        <div class="min_investment" ng-if="!$ctrl.product.min_investment">_ _</div>
+      </div>
+    </div>
+    <div class="row label-row">
+      <div class="col return-rate">
+        历史收益率
+      </div>
+      <div class="col investment_period">
+        投资期限
+      </div>
+      <div class="col min_investment">
+        起投金额
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,167 @@
+.proposal-form-page {
+  .item-toggle {
+    color: #121317;
+    border: 0;
+    margin-bottom: 1px;
+    background: #F2F2F2;
+
+    &:active, &.actived, &.activated {
+      opacity: 1;
+    }
+
+    padding-left: 30px;
+    &:before {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      content: ' ';
+      background: orange;
+    }
+  }
+  .scroll-container {
+    background: #F2F2F2;
+    height: 45px;
+    border: {
+      top: 1px solid white;
+    }
+  }
+  .segment-bar {
+    width: 90%;
+    height: 30px;
+    margin-top: 7px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    color: #6c6c7f;
+    font-size: 13px;
+    border-radius: 10px;
+    @include bold-font();
+
+    .segment-btn {
+      min-width: 25%;
+      text-align: center;
+      padding: 5px 0;
+      border-radius: 10px;
+      color: #121317;
+
+      &.active {
+        background: #318DEB;
+        color: white;
+      }
+
+    }
+  }
+
+  @include proposalItem();
+  .proposal-item {
+    padding-left: 5px;
+    padding-right: 5px;
+    min-height: 66px;
+    @include proposalCheckbox();
+
+    .item-field-checkbox {
+      width: 32px;
+      flex: none;
+    }
+
+    .item-field-risk {
+      flex: 0.8;
+    }
+
+    .item-field-amount {
+      flex: 2;
+      input {
+        display:inline-block;
+        width: 40px;
+        height: 25px;
+        text-align: right;
+        background-color: transparent;
+        position:relative;
+        top: -1px;
+      }
+
+      .icon {
+        background-color: #00A1FF;
+        border-width: 0;
+        color: white;
+        padding-left: 5px;
+        padding-right: 5px;
+
+        &:disabled {
+          opacity: 0.3;
+        }
+      }
+    }
+
+    .item-field {
+      max-height: unset;
+    }
+    .input-field {
+      display: flex;
+      align-items: center;
+      input {
+        max-width: 80%;
+      }
+    }
+
+    .item-field-is-company {
+      position: relative;
+      width: 20px;
+      flex: none;
+
+      &.is-company {
+        &:before {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          content: ' ';
+          background: orange;
+        }
+      }
+    }
+
+  }
+
+
+  .slide-title {
+    margin: 12px 0 5px 0;
+    text-align: center;
+    font-size: 15px;
+    color: #121317;
+
+    span {
+      border-radius: 4px;
+      padding: 3px 20px;
+      background: #dbdbdb;
+      margin: 0 3px;
+    }
+  }
+
+  money-slide {
+    display: block;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .slide-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 30px;
+    .amount {
+      color: #00a1ff;
+      @include bold-font();
+    }
+  }
+}

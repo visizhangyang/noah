@@ -1,0 +1,57 @@
+<ion-view view-title="个人资料"
+          hide-back-button="true"
+          class="account-profile-page">
+  <ion-nav-buttons>
+    <back-btn state="tab.account"></back-btn>
+  </ion-nav-buttons>
+
+  <ion-content>
+
+    <ion-refresher
+      pulling-text="往下拉来刷新..."
+      on-refresh="vm.pullRefresh()">
+    </ion-refresher>
+
+    <refresh-view refresher="vm.refresher">
+      <div class="list margin-top">
+        <div class="item item-field-detail" ng-if="vm.user.real_name">
+          <div class="field field-label">姓名</div>
+          <div class="field field-value" ng-bind="vm.user.real_name"></div>
+        </div>
+        <div class="item item-field-detail">
+          <div class="field field-label">手机号码</div>
+          <div class="field field-value" ng-bind="vm.user.phone"></div>
+        </div>
+        <div class="item item-field-detail" ng-if="vm.user.company">
+          <div class="field field-label">工作单位</div>
+          <div class="field field-value" ng-bind="vm.user.company"></div>
+        </div>
+        <div class="item item-field-detail" ng-if="vm.user.email">
+          <div class="field field-label">邮箱</div>
+          <div class="field field-value" ng-bind="vm.user.email"></div>
+        </div>
+        <div class="item item-field-detail" ng-if="vm.user.post_address">
+          <div class="field field-label">合同邮寄地址</div>
+          <div class="field field-value" ng-bind="vm.user.post_address"></div>
+        </div>
+      </div>
+
+      <div class="list">
+        <user-link link-state="resetPassword">
+          <div class="item item-icon-right">
+            修改密码
+            <i class="icon unicon-forward accessory"></i>
+          </div>
+        </user-link>
+      </div>
+    </refresh-view>
+
+  </ion-content>
+
+  <ion-footer-bar>
+    <button class="button button-full button-red"
+            ng-click="vm.logout()">
+      登出
+    </button>
+  </ion-footer-bar>
+</ion-view>

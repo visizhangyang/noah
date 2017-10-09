@@ -1,0 +1,109 @@
+<ion-view view-title="资产配置" class="home-page">
+    <ion-nav-buttons>
+        <back-btn ng-click="vm.goToApp()"></back-btn>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-small button-clear button-positive examination-button" ng-click="vm.viewbookList()">历史报告</button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="header-box">
+            <div class="row input-row">
+                <div class="col col-66">
+                    <div>{{vm.client.realName}} {{vm.client | investorStatus}} {{vm.client.riskText}}</div>
+                </div>
+                <div class="col col-33" ng-click="vm.resetAssessment()">
+                    重新评估 >
+                </div>
+            </div>
+        </div>
+        <!--TAB-->
+        <div class="button-bar-box">
+            <div class="button-bar">
+                <a class="button" ng-class="{active : vm.current_tab == 1}" ng-click="vm.changeTab(1)">目前配置</a>
+                <a class="button" ng-class="{active : vm.current_tab == 2}" ng-click="vm.changeTab(2)">推荐配置</a>
+            </div>
+        </div>
+        <!--目前配置-->
+        <div ng-if="vm.current_tab == 1" class="financial-box">
+            <barchart-cmp data="vm.allocation"></barchart-cmp>
+        </div>
+        <!--推荐配置--> 
+        <div ng-if="vm.current_tab == 2" class="asset-box">
+            <barchart-cmp data="vm.allocation"></barchart-cmp>
+        </div>
+        <div class="amountPrompt clearPad">
+            <div class="total-amount" ng-if="vm.current_tab == 1">总资产: <span><b>{{vm.data.current_invest}}</b>万元</span></div>
+            <div class="row input-row" ng-if="vm.current_tab == 2">
+                <div class="col col-20">我要新增</div>
+                <div class="col col-50">
+                    <button class="change-amount-icon ion-minus" ng-click="vm.changeInvestment(false)" ng-disabled="vm.data.planning_invest <= 300 || vm.data.planning_invest == null"></button>
+                    <input class="input" ng-class="{value: vm.data.planning_invest != null}" type="number" placeholder="投资金额(万)" ng-change="vm.changeInputValue()"  ng-model="vm.data.planning_invest" ng-model-options="{ debounce: 150 }">
+                    <span class="ext" ng-if="vm.data.planning_invest != null">万</span>
+                    <button class="change-amount-icon ion-plus" ng-click="vm.changeInvestment(true)"></button>
+                </div>
+                <div class="col col-33" ng-click="vm.viewPortfolioDetail()">查看配置详情 ></div>
+            </div>
+        </div>
+
+        <section ng-if="vm.current_tab == 2">
+            <!--TAB-->
+            <div class="button-bar-box">
+                <div class="button-bar">
+                    <a class="button" ng-class="{active : vm.product_cur_tab == 1}" ng-click="vm.productChangeTab(1)">产品推荐</a>
+                    <a class="button" ng-class="{active : vm.product_cur_tab == 2}" ng-click="vm.productChangeTab(2)">组合表现</a>
+                </div>
+            </div>
+            <!--产品推荐-->
+            <div ng-if="vm.product_cur_tab == 1" class="financial-box">
+                <product-cmp ng-if="vm.groupsList" data="vm.groupsList"></product-cmp>
+            </div>
+            <!--组合表现-->
+            <div ng-if="vm.product_cur_tab == 2" class="financial-box">
+                <projection-graph graph-data="vm.profit_map"></projection-graph>
+                <div class="row tips-box" >
+                <div class="col">
+                    <div>
+                    <div>高密度</div>
+                    <div>
+                        <svg width="74px" height="64px" viewBox="0 31 74 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+                        <desc>Created with Sketch.</desc>
+                        <defs>
+                            <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+                            <stop stop-color="#EB4244" offset="0%"></stop>
+                            <stop stop-color="#FFFFFF" offset="100%"></stop>
+                            </linearGradient>
+                            <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+                            <stop stop-color="#B7B7B7" offset="0%"></stop>
+                            <stop stop-color="#FFFFFF" offset="100%"></stop>
+                            </linearGradient>
+                        </defs>
+                        <g id="Group-4" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(0.000000, 31.000000)">
+                            <rect id="Rectangle-16" fill="url(#linearGradient-1)" x="0.279642058" y="0.575757576" width="35.901566" height="62.799127"></rect>
+                            <polygon id="Rectangle-16" fill="url(#linearGradient-2)" points="37.2371365 0.575757576 73.1387025 0.575757576 73.1387025 63.3748846 56.4313866 63.3748846 37.2371365 63.3748846"></polygon>
+                        </g>
+                        </svg>
+                    </div>
+                    <div>低密度</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <!--<div><span class="line" style="border-color: #2ECC71"></span><span>无风险收益曲线</span></div>-->
+                    <div><span class="line" style="border-color: #E94050"></span><span>盈亏线</span></div>
+                    <div class="tip-text">
+                    风险提示：本系统所有产品的的“预期年化收益率”均为相关历史数据或数学模型计算所得，仅供投资者参考。
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+
+    </ion-content>
+
+    <ion-footer-bar>
+        <div class="button-bar row clearPad">
+            <button class="button col col-33" ng-click="vm.generatePortfolioBook()">生成报告</button>
+            <button class="button col" ng-click="vm.viewKYC()">更精准配置</button>
+        </div>
+    </ion-footer-bar>
+</ion-view>

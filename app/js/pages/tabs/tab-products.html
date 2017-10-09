@@ -1,0 +1,36 @@
+<ion-view view-title="产品中心" class="tab-product-page" hide-nav-bar="false" hide-back-button="true">
+
+  <ion-nav-buttons side="primary">
+    <button class="button search-button" ng-click="vm.showSearch()">
+      <i class="icon unicon-search"></i>
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content scroll="false">
+    <div class="button-bar-container padding">
+      <div class="button-bar">
+        <button class="button button-small" ng-class="{current:tab == vm.currentTab}" on-request="vm.showTab(tab)" ng-repeat="tab in vm.tabs">{{tab.asset | transAsset}}({{tab.count}})</button>
+      </div>
+    </div>
+
+    <!--<ion-refresher pulling-text="往下拉来刷新..." on-refresh="vm.pullRefresh()">
+      </ion-refresher>-->
+
+    <!--<refresh-view refresher="vm.refresher">-->
+
+    <ion-scroll class="product-list" direction="y" scrollbar-y="true">
+      <product-item ng-if="vm.currentProductList.length > 0" ng-repeat="product in vm.currentProductList" user="vm.user" product="product">
+      </product-item>
+      <div class="empty" ng-if="vm.currentProductList.length == 0">
+        没有产品
+      </div>
+    </ion-scroll>
+
+    <!--</refresh-view>-->
+
+    <!--<ion-infinite-scroll ng-if="vm.productList.next" on-infinite="vm.loadMore()" distance="20%">
+      </ion-infinite-scroll>-->
+
+
+  </ion-content>
+</ion-view>
